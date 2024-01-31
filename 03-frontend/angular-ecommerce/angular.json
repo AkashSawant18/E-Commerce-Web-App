@@ -69,6 +69,7 @@
               "browserTarget": "angular-ecommerce:build:production"
             },
             "development": {
+              "host": "localhost",
               "browserTarget": "angular-ecommerce:build:development"
             }
           },
