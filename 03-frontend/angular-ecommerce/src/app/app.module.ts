@@ -19,7 +19,6 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 
 import { OktaAuthModule, OktaCallbackComponent, OKTA_CONFIG } from '@okta/okta-angular';
 
-
 import { OktaAuth } from '@okta/okta-auth-js';
 
 import myAppConfig from './config/my-app-config';
