@@ -11,7 +11,6 @@ import com.luv2code.ecommerce.dto.PurchaseResponse;
 import com.luv2code.ecommerce.service.CheckoutService;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/checkout")
 public class CheckoutController {
 	

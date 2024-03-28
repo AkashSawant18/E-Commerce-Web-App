@@ -32,6 +32,8 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
+  storage: Storage = sessionStorage;
+
   constructor(private formBuilder: FormBuilder,
               private luv2ShopFormService : Luv2ShopFormService,
               private cartService : CartService,
@@ -42,13 +44,16 @@ export class CheckoutComponent implements OnInit {
 
     this.reviewCartDetails();
 
+    //read the user;s email from browser storage
+    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('',
                                 [Validators.required, Validators.minLength(2),Luv2ShopValidators.notOnlyWhitespace]),
         lastName:  new FormControl('',
                                 [Validators.required, Validators.minLength(2),Luv2ShopValidators.notOnlyWhitespace]),
-        email: new FormControl('',
+        email: new FormControl(theEmail,
                               [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Luv2ShopValidators.notOnlyWhitespace])
       }),
 
@@ -96,7 +101,7 @@ export class CheckoutComponent implements OnInit {
       }
     );
 
-    //popukate credit card years
+    //populate credit card years
       this.luv2ShopFormService.getCreditCardYears().subscribe(
         data => {
           console.log("Retrieved credit card years: " + JSON.stringify(data));
