@@ -133,30 +133,31 @@ export class CheckoutComponent implements OnInit {
   }
 
   setupStripePaymentForm() {
-
-    //get a handle to stripe elements
+ 
+    // get a handle to stripe elements
     var elements = this.stripe.elements();
-
-    //Create a card elememt
-    this.cardElement = elements.create('card',{hidePostalCode: true});
-
-    //Add an instance of card UI component into the 'card-elememt' div
-    this.cardElement.mount('#card-elment');
-
-    //Add event binding for the 'change' event on the card element
-    this.cardElement.on('change',(event:any) => {
-      //get handle to card error element
+ 
+    // Create a card element ... and hide the zip-code field
+    this.cardElement = elements.create('card', { hidePostalCode: true });
+ 
+    // Add an instance of card UI component into the 'card-element' div
+    this.cardElement.mount('#card-element');
+ 
+    // Add event binding for the 'change' event on the card element
+    this.cardElement.on('change', (event:any) => {
+ 
+      // get a handle to card-errors element
       this.displayError = document.getElementById('card-errors');
-
-      if(event.complete){
+ 
+      if (event.complete) {
         this.displayError.textContent = "";
-      }else if(event.error){
-        //show validation error
+      } else if (event.error) {
+        // show validation error to customer
         this.displayError.textContent = event.error.message;
       }
+ 
     });
-
-
+ 
   }
   reviewCartDetails() {
 
